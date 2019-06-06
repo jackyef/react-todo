@@ -1,13 +1,96 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.container {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-container {
+  padding: 8px;
+  margin: 16px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.input-row {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+input {
+  margin: 0 4px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid gray;
+  padding: 7px;
+}
+
+.align-self-start {
+  align-self: flex-start;
+}
+
+.align-self-end {
+  align-self: flex-end;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid gray;
+}
+
+.row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.row div:nth-child(1) {
+  width: 32px;
+}
+.row div:nth-child(2) {
+  flex: 1;
+}
+
+button {
+  margin-left: 4px;
+  border: none;
+  outline: none;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+button:hover {
+  filter: brightness(110%);
+}
+
+button.green {
+  color: #fff;
+  background: #4baf4f;
+}
+
+button.red {
+  color: #fff;
+  background: #cb3837;
+}
+
+button.blue {
+  color: #fff;
+  background: #3d50b5;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.linethrough {
+  text-decoration: line-through;
 }
