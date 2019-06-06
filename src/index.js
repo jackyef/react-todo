@@ -17,10 +17,12 @@ class App extends React.Component {
       addKeyword: '',
       todos: [
         {
+          id: 1,
           message: 'Learn react',
           done: false
         },
         {
+          id: 2,
           message: 'Learn diving',
           done: true
         }
@@ -51,7 +53,13 @@ class App extends React.Component {
 
       return {
         addKeyword: '',
-        todos: [...prevTodos, { message: prevAddKeyword, done: false }],
+        todos: [
+          ...prevTodos, 
+          { 
+            id: new Date().getTime(), // use timestamp as unique ID
+            message: prevAddKeyword, 
+            done: false 
+          }],
       };
     })
   }
