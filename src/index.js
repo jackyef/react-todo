@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// to be used later!
-// import Greeting from './components/Greeting';
+import Greeting from './components/Greeting';
 
 import './index.css';
 
@@ -31,7 +30,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-  
+        <Greeting name="@jackyef" />
         <div className="input-row">
           <div className="align-self-start">
             <label htmlFor="search">Search: </label>
