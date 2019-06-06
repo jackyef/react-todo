@@ -72,6 +72,17 @@ class App extends React.Component {
     })
   }
 
+  handleToggleDone = id => {
+    this.setState(prevState => {
+      return {
+        todos: prevState.todos.map(todo => ({
+          ...todo,
+          done: todo.id !== id ? todo.done : !todo.done,
+        })),
+      };
+    })
+  }
+
   renderTodos = () => {
     const { todos } = this.state;
 
@@ -81,13 +92,16 @@ class App extends React.Component {
       const handleDelete = () => {
         this.handleDelete(todo.id);
       }
+      const handleToggleDone = () => {
+        this.handleToggleDone(todo.id);
+      }
 
       return (
         <div className={className} key={todo.id}>
           <div>{index + 1}</div>
           <div>{todo.message}</div>
           <div>
-            <button className="green">{markLabel}</button>
+            <button className="green" onClick={handleToggleDone}>{markLabel}</button>
           </div>
           <div>
             <button className="red" onClick={handleDelete}>Delete</button>
