@@ -11,23 +11,76 @@ import './index.css';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      searchKeyword: 'asd',
+      searchKeyword: '',
+      addKeyword: '',
+      todos: [
+        {
+          message: 'Learn react',
+          done: false
+        },
+        {
+          message: 'Learn diving',
+          done: true
+        }
+      ]
     };
   }
 
   componentDidMount = () => {
     console.log('just mounted!');
-  }
+  };
 
   handleSearchChange = event => {
     this.setState({
       searchKeyword: event.target.value
     });
+  };
+
+  handleAddChange = event => {
+    this.setState({
+      addKeyword: event.target.value
+    });
+  };
+
+  handleAddTodo = () => {
+    this.setState(prevState => {
+      const prevAddKeyword = prevState.addKeyword;
+      const prevTodos = prevState.todos;
+
+      return {
+        addKeyword: '',
+        todos: [...prevTodos, { message: prevAddKeyword, done: false }],
+      };
+    })
   }
 
+  renderTodos = () => {
+    const { todos } = this.state;
+
+    return todos.map((todo, index) => {
+      const className = todo.done ? 'row linethrough' : 'row';
+      const markLabel = todo.done ? 'Mark as not done' : 'Mark as done';
+
+      return (
+        <div className={className} key={index}>
+          <div>{index + 1}</div>
+          <div>{todo.message}</div>
+          <div>
+            <button className="green">{markLabel}</button>
+          </div>
+          <div>
+            <button className="red">Delete</button>
+          </div>
+        </div>
+      );
+    });
+  };
+
   render() {
+    const { searchKeyword, addKeyword } = this.state;
+
     return (
       <div className="container">
         <Greeting name="@jackyef" />
@@ -35,49 +88,41 @@ class App extends React.Component {
           <div className="align-self-start">
             <label htmlFor="search">Search: </label>
             <input
-              value={this.state.searchKeyword}
+              value={searchKeyword}
               onChange={this.handleSearchChange}
               type="text"
               name="search"
               placeholder="enter keyword here..."
             />
           </div>
-          <div className="align-self-end">
-            <input type="text" placeholder="Example: read more blogs" />
-            <button className="blue">Add to list</button>
+
+          <div
+            className="align-self-end"
+          >
+            <input
+              type="text"
+              placeholder="Example: read more blogs"
+              value={addKeyword}
+              onChange={this.handleAddChange}
+            />
+            <button className="blue" onClick={this.handleAddTodo}>
+              Add to list
+            </button>
           </div>
         </div>
-  
+
         <div className="todo-container">
           <div className="row bold">
             <div>#</div>
             <div>To-do</div>
           </div>
-          <div className="row">
-            <div>1</div>
-            <div>Learn React</div>
-            <div>
-              <button className="green">Mark as done</button>
-            </div>
-            <div>
-              <button className="red">Delete</button>
-            </div>
-          </div>
-          <div className="row linethrough">
-            <div>2</div>
-            <div>Learn Webpack</div>
-            <div>
-              <button className="green">Mark as not done</button>
-            </div>
-            <div>
-              <button className="red">Delete</button>
-            </div>
-          </div>
+
+          {this.renderTodos()}
         </div>
       </div>
     );
   }
-};
+}
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
