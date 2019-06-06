@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// to be used later!
+// import Greeting from './components/Greeting';
+
 import './index.css';
 
+/**
+ * This is a function component. It does not have state and access to lifecycle methods.
+ */
 const App = () => {
   return (
     <div className="container">
       <div className="input-row">
         <div className="align-self-start">
-          <label for="search">Search: </label>
+          <label htmlFor="search">Search: </label>
           <input
             type="text"
             name="search"
