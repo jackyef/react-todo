@@ -63,6 +63,14 @@ class App extends React.Component {
       };
     })
   }
+  
+  handleDelete = id => {
+    this.setState(prevState => {
+      return {
+        todos: prevState.todos.filter(todo => todo.id !== id),
+      };
+    })
+  }
 
   renderTodos = () => {
     const { todos } = this.state;
@@ -70,16 +78,19 @@ class App extends React.Component {
     return todos.map((todo, index) => {
       const className = todo.done ? 'row linethrough' : 'row';
       const markLabel = todo.done ? 'Mark as not done' : 'Mark as done';
+      const handleDelete = () => {
+        this.handleDelete(todo.id);
+      }
 
       return (
-        <div className={className} key={index}>
+        <div className={className} key={todo.id}>
           <div>{index + 1}</div>
           <div>{todo.message}</div>
           <div>
             <button className="green">{markLabel}</button>
           </div>
           <div>
-            <button className="red">Delete</button>
+            <button className="red" onClick={handleDelete}>Delete</button>
           </div>
         </div>
       );
