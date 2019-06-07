@@ -84,9 +84,14 @@ class App extends React.Component {
   }
 
   renderTodos = () => {
-    const { todos } = this.state;
+    const { todos, searchKeyword } = this.state;
 
     return todos.map((todo, index) => {
+      if (!todo.message.includes(searchKeyword)) {
+        // just return null
+        return null;
+      }
+
       const className = todo.done ? 'row linethrough' : 'row';
       const markLabel = todo.done ? 'Mark as not done' : 'Mark as done';
       const handleDelete = () => {
